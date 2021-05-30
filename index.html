@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head></head>
+<body>
+  <button>play</button><br>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.5.37/Tone.min.js"></script>
+  <script>
+    window.addEventListener("load", ()=>{
+      const button = document.querySelector('button');
+      button.onclick = async ()=>{
+        await Tone.start();
+        let pingPong;
+        try {
+          pingPong = new Tone.PingPongDelay("4n", 0.2).toDestination();
+          console.log("OK");
+        } catch (error) {
+          console.log("error : [" + error + "]");
+        }
+        const drum = new Tone.MembraneSynth().connect(pingPong);
+        drum.triggerAttackRelease("C4", "32n");
+      };
+    });
+  </script>
+</body>
+</html>
